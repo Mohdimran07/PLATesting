@@ -5,37 +5,29 @@ import RawData from "./Pages/RawJson";
 import NotFound from "./Pages/NotFound";
 import PostList from "./Pages/PostList";
 import axios from "axios";
-function App() {
-  const [postData, setPostData] = useState<any>([]);
+
+import NavigationBar from "./components/NavigationBar";
+
+export type postDataType = any[];
+
+function App(): JSX.Element {
+  const [postData, setPostData] = useState<postDataType>([]);
   const [selectedPage, setSelectedPage] = useState<number>(1);
 
-  let count = 0;
-  const [isLoading, setisLoading] = useState<boolean>(false);
-  const [error, setErro] = useState<any>({ type: 0, message: "" });
+  let count: number = 0;
 
-  const fetchApi = async () => {
-    try {
-      if (count === 0) {
-        setisLoading(true);
-      }
+  const fetchApi = async (): Promise<void> => {
+    const response = await axios.get(
+      `http://hn.algolia.com/api/v1/search?query=bar&page=${count}`
+    );
 
-      const responce = await axios.get(
-        "http://hn.algolia.com/api/v1/search?query=bar&page=" + count
+    if (response) {
+      console.log(response);
+      setPostData(
+        (prev: postDataType): postDataType => [...prev, response?.data?.hits]
       );
-
-      if (responce) {
-        console.log(responce);
-        setPostData((prev: any) => [...prev, responce?.data?.hits]);
-      }
-    } catch (e) {
-      if (count === 0) {
-        setErro({ type: 200, message: "somthing went worng" });
-      } else {
-        setErro({ type: 0, message: "" });
-      }
-    } finally {
-      setisLoading(false);
     }
+
     count += 1;
   };
 
@@ -50,16 +42,15 @@ function App() {
 
   return (
     <div className="App">
+      <NavigationBar />
       <Routes>
         <Route
           path="/"
           element={
             <PostList
-              data={postData}
+              postData={postData}
               selectedPage={selectedPage}
               setSelectedPage={setSelectedPage}
-              isLoading={isLoading}
-              error={error}
             ></PostList>
           }
         ></Route>

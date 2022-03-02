@@ -1,32 +1,14 @@
-.App,
-.pages {
-  text-align: center;
+.App{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
-.list > span {
-  width: 150px;
-  overflow: hidden;
-  white-space: nowrap;
-  display: inline-block;
-  padding: 0px 20px;
-}
-
-.title {
-  font-weight: bold;
-  font-size: 20px;
-  background-color: rgb(104, 34, 9) !important;
-  padding: 10px;
-  border-radius: 15px;
-  margin-top: 30px;
+.heading{
+  background-color: rgb(158, 42, 158);
+  width: 100%;
   margin-bottom: 10px;
-}
-.item {
-  background-color: rgb(238, 236, 232);
-  margin-bottom: 5px;
-  padding: 10px 0px;
-  border-radius: 8px;
+  color: white;
 }
