@@ -19,7 +19,7 @@ type dataType = {
   objectID: string;
 }
 
-const PostList = ({postData, selectedPage, setSelectedPage}: listOfPost): JSX.Element => {
+const PostList = ({postData, selectedPage, setSelectedPage}: any): JSX.Element => {
    const navigate: NavigateFunction = useNavigate();
 
   const selectHandler = (jsonData: dataType): void => {
@@ -41,6 +41,7 @@ const PostList = ({postData, selectedPage, setSelectedPage}: listOfPost): JSX.El
          </>
        ): (
          <Box 
+         component="form"
           sx={{
             display: "flex",
             flexDirection: "column",

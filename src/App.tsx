@@ -20,7 +20,7 @@ function App(): JSX.Element {
     const response = await axios.get(
       `http://hn.algolia.com/api/v1/search?query=bar&page=${count}`
     );
-
+     console.log(response)
     if (response) {
       console.log(response);
       setPostData(
